@@ -210,7 +210,9 @@ vc4_target_address_cost (rtx address ATTRIBUTE_UNUSED,
 }
 
 static void
-vc4_print_operand_address (FILE *stream, rtx x)
+vc4_print_operand_address (FILE *stream,
+			   machine_mode mode ATTRIBUTE_UNUSED,
+			   rtx x)
 {
   switch (GET_CODE (x))
     {
@@ -331,7 +333,7 @@ vc4_print_operand (FILE *stream, rtx x, int code)
             asm_fprintf (stream, "%r", REGNO (x));
             break;
           case MEM:
-            vc4_print_operand_address (stream, XEXP (x, 0));
+            vc4_print_operand_address (stream, VOIDmode, XEXP (x, 0));
             break;
           default:
             output_addr_const (stream, x);
